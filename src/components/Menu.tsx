@@ -1,3 +1,7 @@
+import { role } from "@/lib/data";
+import Image from "next/image";
+import Link from "next/link";
+
 const menuItems = [
   {
     title: "MENU",
@@ -6,25 +10,25 @@ const menuItems = [
         icon: "/home.png",
         label: "Home",
         href: "/",
-        visible: ["admin", "teacher", "student", "parent"],
+        visible: ["admin", "doctor", "customer", "service"],
       },
       {
         icon: "/teacher.png",
-        label: "Teachers",
-        href: "/list/teachers",
-        visible: ["admin", "teacher"],
+        label: "Doctors",
+        href: "/list/doctors",
+        visible: ["admin", "doctor"],
       },
       {
         icon: "/student.png",
-        label: "Students",
-        href: "/list/students",
-        visible: ["admin", "teacher"],
+        label: "Customers",
+        href: "/list/customers",
+        visible: ["admin", "doctor"],
       },
       {
         icon: "/parent.png",
-        label: "Parents",
-        href: "/list/parents",
-        visible: ["admin", "teacher"],
+        label: "Service Providers",
+        href: "/list/services",
+        visible: ["admin", "doctor"],
       },
       {
         icon: "/subject.png",
@@ -112,3 +116,24 @@ const menuItems = [
     ],
   },
 ];
+
+const Menu = () => {
+    return (
+        <div className="mt-4 text-sm">
+            {menuItems.map(i=>(
+                <div className="flex flex-col gap-2" key={i.title}>
+                <span className="hidden lg:block text-gray-400 font-light my-4">{i.title}</span>
+                {i.items.map(items=>(
+                    <Link href={items.href} key={items.label} className="flex items-center justify-center lg:justify-start gap-4 text-gray-500 py-2">
+                    <Image src={items.icon} alt="" width={20} height={20}/>
+                    <span>{items.label}</span>
+                    </Link>
+                
+            ))}
+                </div>
+            ))}
+        </div>
+    )
+}
+
+export default Menu
