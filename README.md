@@ -1,4 +1,4 @@
-# Lama Dev School Management Dashboard
+# Synbiogenesis Pet-Care Dashboard
 
 ## Getting Started
 
