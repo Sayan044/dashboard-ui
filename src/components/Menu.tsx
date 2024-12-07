@@ -10,7 +10,7 @@ const menuItems = [
         icon: "/home.png",
         label: "Home",
         href: "/",
-        visible: ["admin", "doctor", "customer", "service"],
+        visible: ["admin", "teacher", "student", "parent"],
       },
       {
         icon: "/teacher.png",
@@ -22,25 +22,25 @@ const menuItems = [
         icon: "/student.png",
         label: "Customers",
         href: "/list/customers",
-        visible: ["admin", "doctor"],
+        visible: ["admin", "doctor", "service"],
       },
       {
         icon: "/parent.png",
-        label: "Service Providers",
+        label: "Services",
         href: "/list/services",
-        visible: ["admin", "doctor"],
+        visible: ["admin", "customer"],
       },
       {
         icon: "/subject.png",
-        label: "Subjects",
-        href: "/list/subjects",
+        label: "Appointments",
+        href: "/list/appointments",
         visible: ["admin"],
       },
       {
         icon: "/class.png",
-        label: "Classes",
-        href: "/list/classes",
-        visible: ["admin", "teacher"],
+        label: "Schedules",
+        href: "/list/schedules",
+        visible: ["admin", "doctor", "service"],
       },
       {
         icon: "/lesson.png",
@@ -50,9 +50,9 @@ const menuItems = [
       },
       {
         icon: "/exam.png",
-        label: "Exams",
-        href: "/list/exams",
-        visible: ["admin", "teacher", "student", "parent"],
+        label: "Meetings",
+        href: "/list/meetings",
+        visible: ["admin", "doctor", "customer", "service"],
       },
       {
         icon: "/assignment.png",
@@ -68,9 +68,9 @@ const menuItems = [
       },
       {
         icon: "/attendance.png",
-        label: "Attendance",
-        href: "/list/attendance",
-        visible: ["admin", "teacher", "student", "parent"],
+        label: "Visiting",
+        href: "/list/visiting",
+        visible: ["admin", "doctor", "customer", "service"],
       },
       {
         icon: "/calendar.png",
@@ -118,22 +118,31 @@ const menuItems = [
 ];
 
 const Menu = () => {
-    return (
-        <div className="mt-4 text-sm">
-            {menuItems.map(i=>(
-                <div className="flex flex-col gap-2" key={i.title}>
-                <span className="hidden lg:block text-gray-400 font-light my-4">{i.title}</span>
-                {i.items.map(items=>(
-                    <Link href={items.href} key={items.label} className="flex items-center justify-center lg:justify-start gap-4 text-gray-500 py-2">
-                    <Image src={items.icon} alt="" width={20} height={20}/>
-                    <span>{items.label}</span>
-                    </Link>
-                
-            ))}
-                </div>
-            ))}
+  return (
+    <div className="mt-4 text-sm">
+      {menuItems.map((i) => (
+        <div className="flex flex-col gap-2" key={i.title}>
+          <span className="hidden lg:block text-gray-400 font-light my-4">
+            {i.title}
+          </span>
+          {i.items.map((item) => {
+            if (item.visible.includes(role)) {
+              return (
+                <Link
+                  href={item.href}
+                  key={item.label}
+                  className="flex items-center justify-center lg:justify-start gap-4 text-gray-500 py-2 md:px-2 rounded-md hover:bg-lamaSkyLight"
+                >
+                  <Image src={item.icon} alt="" width={20} height={20} />
+                  <span className="hidden lg:block">{item.label}</span>
+                </Link>
+              );
+            }
+          })}
         </div>
-    )
-}
+      ))}
+    </div>
+  );
+};
 
-export default Menu
+export default Menu;
